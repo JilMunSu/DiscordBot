@@ -2,6 +2,8 @@ const ms = require('ms')
 
 module.exports = {
     name: '유배',
+    aliases: [],
+    permissions: [],
     description: "유저 뮤트 기능입니다.",
     execute(client, message, cmd, args, Discord){
         // 테스트 서버 관리자 ID: 798111692277284894

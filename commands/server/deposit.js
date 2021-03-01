@@ -1,6 +1,8 @@
 const profileModel = require("../../models/profileSchema");
 module.exports = {
   name: "예금",
+  aliases: [],
+  permissions: [],
   description: "은행에 돈을 예금합니다.",
   async execute(client, message, cmd, args, Discord, profileData) {
     const amount = args[0];

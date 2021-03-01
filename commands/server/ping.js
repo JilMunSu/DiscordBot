@@ -1,5 +1,7 @@
 module.exports = {
     name: '권한',
+    aliases: [],
+    permissions: [],
     description: "테스트 기능입니다.",
     execute(client, message, cmd, args, Discord){
         // 테스트 서버 관리자 ID: 798111692277284894

@@ -1,5 +1,7 @@
 module.exports = {
     name: '제작자',
+    aliases: [],
+    permissions: [],
     description: "제작자 프로필입니다.",
     execute(client, message, cmd, args, Discord){
         const profileembed = new Discord.MessageEmbed()

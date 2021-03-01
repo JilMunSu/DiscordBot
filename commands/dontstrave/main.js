@@ -1,5 +1,7 @@
 module.exports = {
     name: 'dst',
+    aliases: [],
+    permissions: [],
     description: "돈스타브 투게더 정보입니다.",
     async execute(client, message, cmd, args, Discord){
         // 테스트 서버 채널 ID: 798114583054909503

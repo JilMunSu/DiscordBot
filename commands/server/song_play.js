@@ -5,6 +5,7 @@ const queue = new Map();
 module.exports = {
     name: '재생',
     aliases: ['스킵', '그만'],
+    permissions: [],
     description: 'music bot',
     async execute(client, message, cmd, args, Discord){
         const voice_channel = message.member.voice.channel;

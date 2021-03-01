@@ -1,5 +1,7 @@
 module.exports = {
     name: 'dst_Character',
+    aliases: [],
+    permissions: [],
     description: "돈스타브 투게더 캐릭터정보입니다.",
     async execute(client, message, cmd, args, Discord){
         const dstCHembed = new Discord.MessageEmbed()

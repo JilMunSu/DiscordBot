@@ -1,5 +1,7 @@
 module.exports = {
     name: '추방',
+    aliases: [],
+    permissions: [],
     description: "유저 추방 기능입니다.",
     execute(client, message, cmd, args, Discord){
         // 테스트 서버 관리자 ID: 798111692277284894

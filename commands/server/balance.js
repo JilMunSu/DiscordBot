@@ -1,5 +1,6 @@
 module.exports = {
     name: "총액",
+    aliases: [],
     permissions: [],
     description: "총액 확인 시스템",
     execute(client, message, cmd, args, Discord, profileData) {
