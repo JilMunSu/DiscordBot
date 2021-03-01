@@ -1,5 +1,7 @@
 module.exports = {
     name: '도움',
+    aliases: [],
+    permissions: [],
     description: "명령어 도움 기능입니다.",
     async execute(client, message, cmd, args, Discord){
         const HelpEmbed = new Discord.MessageEmbed()
@@ -13,6 +15,9 @@ module.exports = {
             {name: '예금 [숫자]', value: '은행에 돈을 [숫자]만큼 예금합니다'},
             {name: '출금 [숫자]', value: '은행에서 돈을 [숫자]만큼 출금합니다'},
             {name: '기부 [유저] [숫자]', value: '다른 유저에게 돈을 기부합니다. 관리자만 이용가능합니다.'},
+            {name: '투표', value: '투표를 생성합니다.'},
+            {name: '이미지 [제목]', value: '구글에서 [제목]의 이미지를 불러옵니다.'},
+            {name: '마크서버 [서버 IP] [서버 포트]', value: '마인크래프트 [서버 IP]의 정보를 불러옵니다.'},
             {name: '클리어 [숫자]', value: '해당 채널의 메시지를 [숫자] 만큼 삭제합니다. \n 단, 14일 이전의 메시지만 대량삭제 가능합니다.'},
             {name: '유배 [유저] [숫자+단위]', value: '[유저]의 행동을 제한합니다.([숫자+단위]는 선택사항입니다. ex.20s, 1m, 1h)'},
             {name: '두부먹자 [유저]', value: '[유저]의 행동 제한을 해제합니다.'},
