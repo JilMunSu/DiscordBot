@@ -1,0 +1,126 @@
+곡 선택
+// const YouTube = require('simple-youtube-api')
+// const youtube = new YouTube("AIzaSyD_p-15LFUJ09IVuf3ldwRNDfI4dXPXjqY")
+
+
+// const searchString = args.slice(1).join(' ')
+// const url = args[0] ? args[0].replace(/<(.+)>/g, '$1') : ''
+// exports.serverQueue = serverQueue
+
+// try {
+    //     var video = await youtube.getVideo(url)
+    // } catch {
+    //     try {
+    //         var videos = await youtube.searchVideos(searchString, 10)
+    //         var index = 0
+    //         message.channel.send(`===== 곡을 선택해주세요. ======\n${videos.map(video2 => `${++index} - ${videos.title}`).join('\n')}\n1-10 중에서 하나를 선택해주세요.`)
+    //         try {
+    //             var responce = await message.channel.awaitMessage(msg => message.content > 0 && msg.content < 11, {
+    //                 max: 1,
+    //                 time: 3000,
+    //                 errors: ['time']
+    //             })
+    //         } catch {
+    //             message.channel.send("No or invalid song selection was provided")
+    //         }
+    //         const videoIndex = preseInt(responce.first().content)
+    //         var video = await youtube.getVideoByID(videos[videoIndex - 1].id)
+    //     } catch {
+    //         return message.channel.send("검색 결과를 찾을 수 없습니다.")
+    //     }
+    // }
+    // const song = {
+    //     id: video.id,
+    //     title: video.title,
+    //     url: `https://www.youtube.com/watch?v=${video.id}`
+    // }
+
+==========================================================================================================================
+내장 폴더 음악 재생
+
+    let dispatcher;
+    let audio;
+    let voiceChannel;
+    let fileData;
+
+    function playAudio() {
+  voiceChannel = bot.channels.cache.get(config.voiceChannel);
+  if (!voiceChannel) return console.error('The voice channel does not exist!\n(Have you looked at your configuration?)');
+  
+  voiceChannel.join().then(connection => {
+    let files = fs.readdirSync('./music');
+
+    while (true) {
+      audio = files[Math.floor(Math.random() * files.length)];
+      console.log('Searching .mp3 file...');
+      if (audio.endsWith('.mp3')) {
+        break;
+      }
+    }
+
+    dispatcher = connection.play('./music/' + audio);
+    
+    dispatcher.on('start', () => {
+      console.log('Now playing ' + audio);
+      fileData = "Now Playing: " + audio;
+      fs.writeFile("now-playing.txt", fileData, (err) => { 
+      if (err) 
+      console.log(err); 
+      }); 
+      const statusEmbed = new Discord.MessageEmbed()
+      .addField('Now Playing', `${audio}`)
+      .setColor('#0066ff')
+
+      let statusChannel = bot.channels.cache.get(config.statusChannel);
+      if (!statusChannel) return console.error('The status channel does not exist! Skipping.');
+      statusChannel.send(statusEmbed);
+    });
+    
+    dispatcher.on('error', console.error);
+
+    dispatcher.on('finish', () => {
+      console.log('Music has finished playing.');
+      playAudio();
+    });
+    
+  }).catch(e => {
+    console.error(e);
+  });
+  
+}
+
+  console.log('Bot is ready!');
+  console.log(`Logged in as ${bot.user.tag}!`);
+  console.log(`Prefix: ${config.prefix}`);
+  console.log(`Owner ID: ${config.botOwner}`);
+  console.log(`Voice Channel: ${config.voiceChannel}`);
+  console.log(`Status Channel: ${config.statusChannel}\n`);
+  
+================================================================================
+24시간용 이벤트 헨들러
+
+const fs = require('fs');
+const path = require('path');
+
+const readFilesSync = (dir, filelist = []) => {
+    fs.readdirSync(dir).forEach(file => {
+
+        filelist = fs.statSync(path.join(dir, file)).isDirectory()
+            ? readFilesSync(path.join(dir, file), filelist)
+            : filelist.concat(path.join(dir, file));
+    });
+    return filelist;
+}
+
+module.exports = (client, Discord) => {
+    const load_dir = (dirs) => {
+
+        const event_files = readFilesSync(`./events/${dirs}`).filter(file => file.endsWith('.js'));
+        for(const file of event_files){
+            const event = require(path.join(__dirname,`../${file}`));
+            const event_name = file.split('.')[0].split('\\')[0].split('/');
+            client.on(event_name[event_name.length - 1], event.bind(null, Discord, client));
+        }
+    }
+    ['client', 'guild'].forEach(e => load_dir(e));
+}
