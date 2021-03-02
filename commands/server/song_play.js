@@ -5,15 +5,12 @@ const queue = new Map();
 module.exports = {
     name: '재생',
     aliases: ['스킵', '그만'],
-    permissions: [],
+    permissions: ["CONNECT", "SPEAK"],
     description: 'music bot',
     async execute(client, message, cmd, args, Discord){
         const voice_channel = message.member.voice.channel;
         if (!voice_channel) return message.channel.send("먼저 음성채널에 들어가주세요.");
 
-        const permissions = voice_channel.permissionsFor(message.client.user);
-        if (!permissions.has('CONNECT') | !permissions.has('SPEAK')) return message.channel.send("당신은 권한이 없습니다.");
-        
         const server_queue = queue.get(message.guild.id);
         if(cmd == '재생') {
             if (!args.length) return message.channel.send("제목을 입력해주세요");

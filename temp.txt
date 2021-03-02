@@ -124,3 +124,6 @@ module.exports = (client, Discord) => {
     }
     ['client', 'guild'].forEach(e => load_dir(e));
 }
+
+        // 테스트 서버 관리자 ID: 798111692277284894
+        // 메인 서버 관리자 ID: 451351322109935626 / 451355421152903178

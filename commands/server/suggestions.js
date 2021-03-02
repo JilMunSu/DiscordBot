@@ -1,7 +1,7 @@
 module.exports = {
     name: '투표',
     aliases: [],
-    permissions: [],
+    permissions: ["ADMINISTRATOR"],
     description: '투표를 하자!',
     execute(client, message, cmd, args, Discord){
         const channel = message.guild.channels.cache.find(c => c.name === 'bot');

@@ -5,7 +5,6 @@ module.exports = {
   permissions: ["ADMINISTRATOR"],
   description: "다른 사람에게 돈을 기부합니다.",
   async execute(client, message, cmd, args, Discord, profileData) {
-    if (message.member.id != "361336155628765185") return message.channel.send(`해당 기능은 관리자만 이용가능합니다.`);
     if (!args.length) return message.channel.send("돈을 기부할 사람을 멘션해주세요.");
     const amount = args[1];
     const target = message.mentions.users.first();

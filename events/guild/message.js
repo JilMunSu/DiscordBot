@@ -107,7 +107,7 @@ module.exports = async (Discord, client, message) => {
     try {
         command.execute(client, message, cmd, args, Discord, profileData);
     } catch (err){
-        message.reply("알 수 없는 명령어입니다. 명령어를 확인하려면 \'..도움\'을 입력해주세요. ");
+        message.reply("명령을 수행하는 과정에서 오류가 발생했습니다.");
         console.log(err);
     }
 }
